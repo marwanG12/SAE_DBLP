@@ -23,7 +23,7 @@ if (isset($_GET['authorName'])) {
     //$sql = "SELECT * FROM dblp.authors WHERE dblp.authors.name ILIKE :authorName";
 
     $sql = "SELECT dblp.affiliation.name AS name, dblp.affiliation.country AS country,
-    COUNT(dblp.publications.id) AS nbpublication,
+    COUNT(dblp.publications.id) AS nbpublications,
     STRING_AGG(DISTINCT dblp.publications.title, ', ') AS publicationlist,
     STRING_AGG(DISTINCT dblp.authors.name, ', ') AS affiliatedauthors
     FROM dblp.affiliation

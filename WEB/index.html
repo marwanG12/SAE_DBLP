@@ -13,7 +13,7 @@
     
     <h18>Recherche d'auteur</h18>
     <form id="searchForm">
-        <label for="authorName">Nom de l'auteur (partiel ou completo) : </label>
+        <label for="authorName">Nom de l'auteur (partiel ou complet) : </label>
         <input type="text" id="authorName" name="authorName">
         <button type="button" onclick="searchAuthors()">Rechercher par Auteur</button>
         <button type="button" onclick="searchByAffiliation()">Rechercher par Affiliation</button>
@@ -85,10 +85,28 @@
                             const affiliation = document.createElement("p");
                             affiliation.textContent = `Affiliation: ${result.affiliation || 'N/A'}`;
 
+                            const publicationname = document.createElement("p");
+                            publicationname.textContent = `Publications: ${result.publicationname || 'N/A'}`;
+                            publicationname.style.display = "none"; // Cacher par défaut
 
+                            // Ajoutez un bouton pour basculer l'affichage des données supplémentaires
+                            const toggleButton0 = document.createElement("button");
+                                toggleButton0.textContent = "Afficher les publications";
+                                toggleButton0.addEventListener("click", () => {
+                                    if (publicationname.style.display === "none") {
+                                        publicationname.style.display = "block";
+                                        toggleButton0.textContent = "Masquer les publications";
+                                    } else {
+                                        publicationname.style.display = "none";
+                                        toggleButton0.textContent = "Afficher les publications";
+                                    }
+                                });
+
+                            authorInfo.appendChild(toggleButton0);
                             authorInfo.appendChild(name);
                             authorInfo.appendChild(affiliation);
                             authorInfo.appendChild(nbpublications);
+                            authorInfo.appendChild(publicationname);
                             searchResultsDiv.appendChild(authorInfo);
                         });
                     }
@@ -130,19 +148,54 @@
 
                             const country = document.createElement("p");
                             country.textContent = `Pays: ${result.country || 'N/A'}`;
-                            
+
                             const publicationlist = document.createElement("p");
                             publicationlist.textContent = `Liste de publications: ${result.publicationlist || 'N/A'}`;
+                            publicationlist.style.display = "none"; // Cacher par défaut
+
+                            // Ajoutez un bouton pour basculer l'affichage des données supplémentaires
+                            const toggleButton2 = document.createElement("button");
+                            toggleButton2.textContent = "Afficher les articles publies";
+                            toggleButton2.addEventListener("click", () => {
+                                if (publicationlist.style.display === "none") {
+                                    publicationlist.style.display = "block";
+                                    toggleButton2.textContent = "Masquer les articles publies";
+                                } else {
+                                    publicationlist.style.display = "none";
+                                    toggleButton2.textContent = "Afficher les articles publies";
+                                }
+                            });
 
                             const affiliatedauthors = document.createElement("p");
                             affiliatedauthors.textContent = `Auteurs affilies: ${result.affiliatedauthors || 'N/A'}`;
+                            affiliatedauthors.style.display = "none"; // Cacher par défaut
+                           
+
+                            // Ajoutez un bouton pour basculer l'affichage des données supplémentaires
+                            const toggleButton = document.createElement("button");
+                            toggleButton.textContent = "Afficher les auteurs affilies";
+                            toggleButton.addEventListener("click", () => {
+                                if (affiliatedauthors.style.display === "none") {
+                                    affiliatedauthors.style.display = "block";
+                                    toggleButton.textContent = "Masquer les auteurs affilies";
+                                } else {
+                                    affiliatedauthors.style.display = "none";
+                                    toggleButton.textContent = "Afficher les auteurs affilies";
+                                }
+                            });
+
+                            
 
 
+                            affiliationInfo.appendChild(toggleButton);
+                            affiliationInfo.appendChild(toggleButton2);
+
+                            //affiliationInfo.appendChild(additionalData);
 
                             affiliationInfo.appendChild(name);
+                            affiliationInfo.appendChild(nbpublications);
                             affiliationInfo.appendChild(country);
-                            affiliationInfo.appendChild(nbpublications);
-                            affiliationInfo.appendChild(nbpublications);
+                            affiliationInfo.appendChild(publicationlist);
                             affiliationInfo.appendChild(affiliatedauthors);
 
                             searchResultsDiv.appendChild(affiliationInfo);
@@ -150,8 +203,10 @@
                     }
                 }
 
+                
 
 
+                
 
 
              

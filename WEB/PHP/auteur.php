@@ -22,11 +22,15 @@ if (isset($_GET['authorName'])) {
     // Échappez les caractères spéciaux et effectuez votre recherche ici
     //$sql = "SELECT * FROM dblp.authors WHERE dblp.authors.name ILIKE :authorName";
 
-    $sql = "SELECT dblp.authors.name, dblp.affiliation.name AS affiliation, COUNT(dblp.publicationdetails.publication_id) AS nbpublications
+    $sql = "SELECT dblp.authors.name, 
+    dblp.affiliation.name AS affiliation, 
+    COUNT(dblp.publicationdetails.publication_id) AS nbpublications,
+    STRING_AGG(DISTINCT dblp.publications.title, ', ') AS publicationname
     FROM dblp.authors
     JOIN dblp.affiliation ON dblp.authors.affiliation = dblp.affiliation.idAff
     JOIN dblp.publicationauthors ON dblp.authors.id = dblp.publicationauthors.author_id
     JOIN dblp.publicationdetails ON dblp.publicationauthors.publication_id = dblp.publicationdetails.publication_id
+    JOIN dblp.publications ON dblp.publicationdetails.publication_id = dblp.publications.id
     WHERE dblp.authors.name ILIKE :authorName
     GROUP BY dblp.authors.name, dblp.affiliation.name, dblp.affiliation.country
     ";
