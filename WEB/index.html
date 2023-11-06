@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recherche d'auteur</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/style.css">
+</head>
+<body>
+    
+    <h1>Test de Connexion PostgreSQL</h1>
+    <button type="button" onclick="testDatabaseConnection()">Tester la connexion</button>
+    <div id="connectionStatus"></div> <!-- C'est ici que l'élément avec l'ID "connectionStatus" est créé -->
+
+    
+    <h18>Recherche d'auteur</h18>
+    <form id="searchForm">
+        <label for="authorName">Nom de l'auteur (partiel ou completo) : </label>
+        <input type="text" id="authorName" name="authorName">
+        <button type="button" onclick="searchAuthors()">Rechercher par Auteur</button>
+        <button type="button" onclick="searchByAffiliation()">Rechercher par Affiliation</button>
+    </form>
+
+    
+
+
+    <div id="searchResults">
+        <!-- Les résultats de la recherche seront affichés ici -->
+    </div>
+
+    <script>
+
+        
+
+            function testDatabaseConnection() {
+                fetch("http://localhost/WEB/PHP/connexion.php") // Appel du fichier PHP pour le test de connexion
+                    .then(response => {
+                        if (response.ok) {
+                            return response.text(); // Renvoie le texte du résultat
+                        } else {
+                            throw new Error("La requête a échoué.");
+                        }
+                    })
+                    .then(data => {
+                        document.getElementById("connectionStatus").textContent = data;
+                    })
+                    .catch(error => {
+                        console.error("Erreur de test de connexion : " + error);
+                    });
+                }
+
+
+
+                    
+                function searchAuthors() {
+                    const authorName = document.getElementById("authorName").value;
+                    fetch("http://localhost/WEB/PHP/auteur.php?authorName=" + authorName)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Appel de la fonction displayResults pour afficher les données
+                            displayResultsActors(data);
+                        })
+                        .catch(error => {
+                            console.error("Erreur de recherche : " + error);
+                        });
+                }
+
+                
+
+                function displayResultsActors(results) {
+                    const searchResultsDiv = document.getElementById("searchResults");
+                    searchResultsDiv.innerHTML = "";
+
+                    if (results.length === 0) {
+                        searchResultsDiv.innerHTML = "Aucun résultat trouvé.";
+                    } else {
+                        results.forEach(result => {
+                            const authorInfo = document.createElement("div");
+                            authorInfo.classList.add("author-info");
+
+                            const name = document.createElement("h2");
+                            name.textContent = result.name;
+
+                            const nbpublications = document.createElement("p");
+                            nbpublications.textContent = `Nombre de publications: ${result.nbpublications || 'N/A'}`;
+
+                            const affiliation = document.createElement("p");
+                            affiliation.textContent = `Affiliation: ${result.affiliation || 'N/A'}`;
+
+
+                            authorInfo.appendChild(name);
+                            authorInfo.appendChild(affiliation);
+                            authorInfo.appendChild(nbpublications);
+                            searchResultsDiv.appendChild(authorInfo);
+                        });
+                    }
+                }
+
+
+         
+                function searchByAffiliation() {
+                    const affiliationName = document.getElementById("authorName").value; // Utilisez un autre élément si nécessaire
+                    fetch("http://localhost/WEB/PHP/affiliation.php?authorName=" + affiliationName)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Appel de la fonction displayResults pour afficher les données
+                            displayResultsAffiliation(data);
+                        })
+                        .catch(error => {
+                            console.error("Erreur de recherche par affiliation : " + error);
+                        });
+                }
+
+
+
+                function displayResultsAffiliation(results) {
+                    const searchResultsDiv = document.getElementById("searchResults");
+                    searchResultsDiv.innerHTML = "";
+
+                    if (results.length === 0) {
+                        searchResultsDiv.innerHTML = "Aucun résultat trouvé.";
+                    } else {
+                        results.forEach(result => {
+                            const affiliationInfo = document.createElement("div");
+                            affiliationInfo.classList.add("affiliation-info");
+
+                            const name = document.createElement("h2");
+                            name.textContent = result.name;
+
+                            const nbpublications = document.createElement("p");
+                            nbpublications.textContent = `Nombre de publications: ${result.nbpublications || 'N/A'}`;
+
+                            const country = document.createElement("p");
+                            country.textContent = `Pays: ${result.country || 'N/A'}`;
+                            
+                            const publicationlist = document.createElement("p");
+                            publicationlist.textContent = `Liste de publications: ${result.publicationlist || 'N/A'}`;
+
+                            const affiliatedauthors = document.createElement("p");
+                            affiliatedauthors.textContent = `Auteurs affilies: ${result.affiliatedauthors || 'N/A'}`;
+
+
+
+                            affiliationInfo.appendChild(name);
+                            affiliationInfo.appendChild(country);
+                            affiliationInfo.appendChild(nbpublications);
+                            affiliationInfo.appendChild(nbpublications);
+                            affiliationInfo.appendChild(affiliatedauthors);
+
+                            searchResultsDiv.appendChild(affiliationInfo);
+                        });
+                    }
+                }
+
+
+
+
+
+             
+
+
+            
+    
+
+
+        
+    </script>
+</body>
+</html>
