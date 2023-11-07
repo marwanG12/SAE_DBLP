@@ -55,6 +55,10 @@
                     
                 function searchAuthors() {
                     const authorName = document.getElementById("authorName").value;
+                    if (authorName.trim() === "") {
+                        alert("Veuillez entrer un nom pour effectuer la recherche.");
+                        return; // Arrêtez la recherche si la requête est vide
+                    }
                     fetch("http://localhost/SAE_DBLP/WEB/PHP/auteur.php?authorName=" + authorName)
                         .then(response => response.json())
                         .then(data => {
@@ -119,6 +123,10 @@
          
                 function searchByAffiliation() {
                     const affiliationName = document.getElementById("authorName").value; // Utilisez un autre élément si nécessaire
+                    if (affiliationName.trim() === "") {
+                        alert("Veuillez entrer une affiliation pour effectuer la recherche.");
+                        return; // Arrêtez la recherche si la requête est vide
+                    }
                     fetch("http://localhost/SAE_DBLP/WEB/PHP/affiliation.php?authorName=" + affiliationName)
                         .then(response => response.json())
                         .then(data => {
@@ -207,34 +215,26 @@
                 }
 
                 function searchByTextQuery() {
-                    const tfidf = document.getElementById("authorName").value; // Utilisez un autre élément si nécessaire
-                    fetch("http://localhost/SAE_DBLP/WEB/PHP/tfidf.php?authorname=" + tfidf)
-                    .then(response => response.json())
+                    const query = document.getElementById("authorName").value;
+                    console.log("Requête en cours : " + query); // Afficher la requête dans la console
+                    if (query.trim() === "") {
+                        alert("Veuillez entrer une requête pour effectuer la recherche.");
+                        return;
+                    }
+
+                    fetch("http://localhost/SAE_DBLP/WEB/PHP/tfidf.php?query=" + query)
+                        .then(response => response.text()) // Utilisez response.text() pour obtenir le contenu textuel
                         .then(data => {
-                            // Appel de la fonction displayResults pour afficher les données
-                            displayResultsAffiliation(data);
+                            const searchResultsDiv = document.getElementById("searchResults");
+                            searchResultsDiv.innerHTML = data; // Ajoutez le contenu renvoyé par le script PHP directement à la div des résultats
                         })
                         .catch(error => {
-                            console.error("Erreur de recherche par affiliation : " + error);
+                            console.error("Erreur de recherche textuelle : " + error);
                         });
                 }
 
 
-                function displayResultsTextQuery(results) {
-                
-                }
 
-
-
-
-             
-
-
-            
-    
-
-
-        
     </script>
 </body>
 </html>

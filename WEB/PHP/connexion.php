@@ -5,9 +5,9 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
 // Informations de connexion à la base de données
-$dbname = 'mghrairi';
-$user = 'mghrairi';
-$password = 'lenouveauMDP';
+$dbname = 'njouini';
+$user = 'njouini';
+$password = 'Noufnouf-78800';
 $host = 'database-etudiants.iut.univ-paris8.fr';
 $port = '5432';
 

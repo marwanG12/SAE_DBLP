@@ -1,114 +1,77 @@
 <?php
-
-header("Access-Control-Allow-Origin: http://s5cdblp");
+// Configuration de l'en-tête pour autoriser l'accès depuis le domaine distant (remplacez par votre propre domaine)
+header("Access-Control-Allow-Origin: http://votre_domaine");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Content-Type: application/json");
 
-$dbname = 'njouini';
-$user = 'njouini';
-$password = 'Noufnouf-78800';
-$host = 'database-etudiants.iut.univ-paris8.fr';
-$port = '5432';
+// Récupérez la requête du paramètre GET
+$query = $_GET['query'];
 
-// Tentez de vous connecter à la base de données  
-$conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password");
+// Ajoutez cette instruction de débogage pour vérifier la requête textuelle reçue
+echo "Requête textuelle : " . $query . "\n";
 
+// Appelez la fonction searchByTextQuery avec la requête de l'utilisateur
+$results = searchByTextQuery($query);
+
+// Ajoutez cette instruction de débogage pour vérifier les résultats du script Python
+echo "Résultats du script Python : " . $results . "\n";
+
+if (!empty($results)) {
+    $tfidfData = json_decode($results, true);
+    
+    if (is_array($tfidfData)) {
+        $words = array_keys($tfidfData); // Liste des mots de la requête
+
+        // Connexion à la base de données (à personnaliser avec vos informations)
+        $dbname = 'njouini';
+        $user = 'njouini';
+        $password = 'Noufnouf-78800';
+        $host = 'database-etudiants.iut.univ-paris8.fr';
+        $port = '5432';
+        $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password");
+
+        // Construisez la clause WHERE en utilisant les mots de la requête
+        $whereClause = 'word IN (' . implode(',', array_map(function ($word) {
+            return "'" . $word . "'";
+        }, $words)) . ')';
+
+        // Construisez la requête SQL pour récupérer les publications (à personnaliser selon votre structure de base de données)
+        $sql = "SELECT id, title FROM dblp.publications WHERE $whereClause";
+
+        // Exécution de la requête SQL
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $publications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!empty($publications)) {
+            // Affichage des publications
+            echo json_encode($publications);
+        } else {
+            echo json_encode(array("message" => "Aucune publication trouvée."));
+        }
+    } else {
+        echo json_encode(array("message" => "Aucun résultat trouvé."));
+    }
+} else {
+    echo json_encode(array("message" => "Aucun résultat trouvé."));
+}
+
+// Fonction pour exécuter le script Python et récupérer les données
 function searchByTextQuery($query) {
-    // Connexion à la base de données (assurez-vous d'avoir déjà établi la connexion)
+    $keywords = explode(', ', $query); // Divisez la chaîne en mots-clés
 
-    // Prétraitement de la requête
-    $query = strtolower($query); // Convertir la requête en minuscules
+    // Échappez chaque mot-clé pour éviter les problèmes de sécurité
+    $escapedKeywords = array_map(function ($keyword) {
+        return escapeshellarg($keyword);
+    }, $keywords);
 
-    // Calcul des poids TF-IDF pour la requête
-    $queryWords = explode(" ", $query);
-    $queryVector = array();
-    foreach ($queryWords as $word) {
-        $queryVector[$word] = calculateTFIDF($word, $query); // Remplacez cette fonction par le calcul TF-IDF réel
-    }
+    // Chemin vers le script Python et passage des mots-clés
+    $pythonScript = "python C:\wamp64\www\SAE_DBLP\WEB\PYTHON\\tfidf.py " . implode(',', $escapedKeywords);
 
-    // Récupérer tous les documents de la base de données (vous pouvez utiliser une requête SQL pour cela)
-    $documents = getAllDocuments(); // Remplacez cette fonction pour obtenir les documents
+    // Exécution du script Python
+    $result = shell_exec($pythonScript);
 
-    // Calculer la similarité cosinus entre la requête et chaque document
-    $results = array();
-    foreach ($documents as $document) {
-        // Calculer le produit scalaire entre le vecteur de requête et le vecteur du document
-        $dotProduct = 0;
-        foreach ($queryVector as $word => $tfidf) {
-            if (isset($document['tfidf'][$word])) {
-                $dotProduct += $tfidf * $document['tfidf'][$word];
-            }
-        }
-
-        // Calculer la norme (longueur) des vecteurs
-        $queryNorm = sqrt(array_sum(array_map(function ($x) { return $x * $x; }, $queryVector)));
-        $documentNorm = sqrt(array_sum(array_map(function ($x) { return $x * $x; }, $document['tfidf'])));
-
-        // Calculer la similarité cosinus
-        if ($queryNorm > 0 && $documentNorm > 0) {
-            $similarity = $dotProduct / ($queryNorm * $documentNorm);
-            $results[] = array('document' => $document, 'similarity' => $similarity);
-        }
-    }
-
-    // Trier les résultats par similarité cosinus décroissante
-    usort($results, function ($a, $b) {
-        return $b['similarity'] <=> $a['similarity'];
-    });
-
-    // Retourner les résultats triés
-    return $results;
-}
-
-function calculateTFIDF($word, $query) {
-    $dbname = 'njouini';
-    $user = 'njouini';
-    $password = 'Noufnouf-78800';
-    $host = 'database-etudiants.iut.univ-paris8.fr';
-    $port = '5432';
-
-    // Tentez de vous connecter à la base de données  
-    $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password");
-    
-    
-}
-
-function getAllDocuments(){
-    $dbname = 'njouini';
-    $user = 'njouini';
-    $password = 'Noufnouf-78800';
-    $host = 'database-etudiants.iut.univ-paris8.fr';
-    $port = '5432';
-
-    // Tentez de vous connecter à la base de données  
-    $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password");
-
-    // Exécutez la requête SQL appropriée pour extraire les données des documents
-    $query = "SELECT  mot, tfidf FROM insertTfIdf;"; // Personnalisez cette requête si nécessaire
-    $result = pg_query($conn, $query);
-
-    if (!$result) {
-        die("La requête a échoué : " . pg_last_error());
-    }
-
-    // Initialisez un tableau pour stocker les documents
-    $documents = array();
-
-    while ($row = pg_fetch_assoc($result)) {
-        // Ajoutez chaque document au tableau
-        $document = array(
-            'id' => $row['id'],
-            'title' => $row['title']
-            // Ajoutez d'autres colonnes si nécessaire
-        );
-
-        $documents[] = $document;
-    }
-
-    // Fermeture de la connexion à la base de données
-    pg_close($conn);
-
-    // Retournez la liste des documents
-    return $documents;
+    return $result;
 }
 ?>
