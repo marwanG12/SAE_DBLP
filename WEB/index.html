@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Recherche d'auteur</title>
-    <link rel="stylesheet" type="text/css" href="/CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
 </head>
 <body>
     
-    <h1>Test de Connexion PostgreSQL</h1>
+    <h18>Test de Connexion PostgreSQL</h18>
     <button type="button" onclick="testDatabaseConnection()">Tester la connexion</button>
     <div id="connectionStatus"></div> <!-- C'est ici que l'élément avec l'ID "connectionStatus" est créé -->
+    <br>
 
     
     <h18>Recherche d'auteur</h18>
@@ -17,6 +19,7 @@
         <input type="text" id="authorName" name="authorName">
         <button type="button" onclick="searchAuthors()">Rechercher par Auteur</button>
         <button type="button" onclick="searchByAffiliation()">Rechercher par Affiliation</button>
+        <button type="button" onclick="searchByTextQuery()">Rechercher par Requête Textuelle</button>
     </form>
 
     
@@ -31,7 +34,7 @@
         
 
             function testDatabaseConnection() {
-                fetch("http://localhost/WEB/PHP/connexion.php") // Appel du fichier PHP pour le test de connexion
+                fetch("http://localhost/SAE_DBLP/WEB/PHP/connexion.php") // Appel du fichier PHP pour le test de connexion
                     .then(response => {
                         if (response.ok) {
                             return response.text(); // Renvoie le texte du résultat
@@ -52,7 +55,7 @@
                     
                 function searchAuthors() {
                     const authorName = document.getElementById("authorName").value;
-                    fetch("http://localhost/WEB/PHP/auteur.php?authorName=" + authorName)
+                    fetch("http://localhost/SAE_DBLP/WEB/PHP/auteur.php?authorName=" + authorName)
                         .then(response => response.json())
                         .then(data => {
                             // Appel de la fonction displayResults pour afficher les données
@@ -116,7 +119,7 @@
          
                 function searchByAffiliation() {
                     const affiliationName = document.getElementById("authorName").value; // Utilisez un autre élément si nécessaire
-                    fetch("http://localhost/WEB/PHP/affiliation.php?authorName=" + affiliationName)
+                    fetch("http://localhost/SAE_DBLP/WEB/PHP/affiliation.php?authorName=" + affiliationName)
                         .then(response => response.json())
                         .then(data => {
                             // Appel de la fonction displayResults pour afficher les données
@@ -203,10 +206,25 @@
                     }
                 }
 
-                
+                function searchByTextQuery() {
+                    const tfidf = document.getElementById("authorName").value; // Utilisez un autre élément si nécessaire
+                    fetch("http://localhost/SAE_DBLP/WEB/PHP/tfidf.php?authorname=" + tfidf)
+                    .then(response => response.json())
+                        .then(data => {
+                            // Appel de la fonction displayResults pour afficher les données
+                            displayResultsAffiliation(data);
+                        })
+                        .catch(error => {
+                            console.error("Erreur de recherche par affiliation : " + error);
+                        });
+                }
 
 
+                function displayResultsTextQuery(results) {
                 
+                }
+
+
 
 
              

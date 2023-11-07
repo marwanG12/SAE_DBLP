@@ -1,13 +1,12 @@
 <?php
 
-
 header("Access-Control-Allow-Origin: http://s5cdblp");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
-$dbname = 'mghrairi';
-$user = 'mghrairi';
-$password = 'lenouveauMDP';
+$dbname = 'njouini';
+$user = 'njouini';
+$password = 'Noufnouf-78800';
 $host = 'database-etudiants.iut.univ-paris8.fr';
 $port = '5432';
 
