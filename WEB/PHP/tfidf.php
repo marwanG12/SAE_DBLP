@@ -14,8 +14,6 @@ echo "Requête textuelle : " . $query . "\n";
 // Appelez la fonction searchByTextQuery avec la requête de l'utilisateur
 $results = searchByTextQuery($query);
 
-// Ajoutez cette instruction de débogage pour vérifier les résultats du script Python
-echo "Résultats du script Python : " . $results . "\n";
 
 if (!empty($results)) {
     $tfidfData = json_decode($results, true);
@@ -59,19 +57,20 @@ if (!empty($results)) {
 
 // Fonction pour exécuter le script Python et récupérer les données
 function searchByTextQuery($query) {
-    $keywords = explode(', ', $query); // Divisez la chaîne en mots-clés
+    // Échappez la requête pour éviter les problèmes de sécurité
+    $escapedQuery = escapeshellarg($query);
 
-    // Échappez chaque mot-clé pour éviter les problèmes de sécurité
-    $escapedKeywords = array_map(function ($keyword) {
-        return escapeshellarg($keyword);
-    }, $keywords);
+    // Chemin vers le script Python
+    $pythonScript = "python C:\wamp64\www\SAE_DBLP\WEB\PYTHON\\tfidf.py $escapedQuery";
 
-    // Chemin vers le script Python et passage des mots-clés
-    $pythonScript = "python C:\wamp64\www\SAE_DBLP\WEB\PYTHON\\tfidf.py " . implode(',', $escapedKeywords);
-
-    // Exécution du script Python
+    // Exécutez le script Python
     $result = shell_exec($pythonScript);
 
+    // Ajoutez ces lignes pour afficher les résultats dans la réponse HTTP
+    echo "Résultat du script Python : " . $result; // Affichez les résultats dans la réponse HTTP
     return $result;
 }
+
+
+
 ?>
