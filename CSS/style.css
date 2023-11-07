@@ -15,14 +15,7 @@ h1 {
     margin-bottom: 10px;
 }
 
-h18 {
-    background-color: #7e7d7d;
-    color: #fff;
-    padding: 10px;
-    margin: 0;
-    text-align: center;
-    margin-top: 50px; 
-}
+
 
 .container {
     max-width: 800px;
@@ -103,8 +96,8 @@ button:hover {
 
 .affiliation-info {
     display: inline-block;
-    background-color: #4e0d0d;
-    border: 1px solid #ccc;
+    background-color: #a9a5a5;
+    border: 1px solid #bdbdbd;
     border-radius: 5px;
     padding: 20px;
     margin: 10px;
