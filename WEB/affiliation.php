@@ -1,8 +1,8 @@
 <?php
 
-header("Access-Control-Allow-Origin: http://s5cdblp");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+// header("Access-Control-Allow-Origin: http://s5cdblp");
+// header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+// header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
 $dbname = 'njouini';
 $user = 'njouini';
