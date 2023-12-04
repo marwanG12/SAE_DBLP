@@ -1,21 +1,21 @@
 
         
-            function testDatabaseConnection() {
-                fetch("connexion.php") // Appel du fichier PHP pour le test de connexion
-                    .then(response => {
-                        if (response.ok) {
-                            return response.text(); // Renvoie le texte du résultat
-                        } else {
-                            throw new Error("La requête a échoué.");
-                        }
-                    })
-                    .then(data => {
-                        document.getElementById("connectionStatus").textContent = data;
-                    })
-                    .catch(error => {
-                        console.error("Erreur de test de connexion : " + error);
-                    });
-                }
+            // function testDatabaseConnection() {
+            //     fetch("connexion.php") // Appel du fichier PHP pour le test de connexion
+            //         .then(response => {
+            //             if (response.ok) {
+            //                 return response.text(); // Renvoie le texte du résultat
+            //             } else {
+            //                 throw new Error("La requête a échoué.");
+            //             }
+            //         })
+            //         .then(data => {
+            //             document.getElementById("connectionStatus").textContent = data;
+            //         })
+            //         .catch(error => {
+            //             console.error("Erreur de test de connexion : " + error);
+            //         });
+            //     }
 
 
 
