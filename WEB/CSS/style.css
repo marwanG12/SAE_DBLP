@@ -2,9 +2,13 @@
   box-sizing: border-box;
 }
 
-header h1 {
+header {
   margin-bottom: 200px;
   color: white;
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  width: 100%;
 }
 
 body{
@@ -21,38 +25,17 @@ body{
 }
 
 
-.btn-connect{
-  padding: 10px;
-  margin: 5px;
-  cursor: pointer;
-  background-color: #265027;
-  color: white;
-  border: none;
-  border-radius: 5px;
+
+
+.searching{
+
 }
-
-
-.btn-connect:hover {
-  background-color:#22a6b3;
-}
-
-
-
-
-h1 {
-  color: #333;
-  text-align: center;
-  margin-bottom: 20px; /* Ajustez la marge selon vos préférences */
-}
-
-
-
-
 
 .search-box{
   width: fit-content;
   height: fit-content;
   position: relative;
+  margin-top: -200px;
 }
 .input-search{
   height: 50px;
