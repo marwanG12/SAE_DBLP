@@ -54,8 +54,8 @@
 
 
         <div class="section over-hide z-bigger">
-		      <div class="col-12 pt-5">
-						<p class="mb-4 pb-2">Rechercher par :</p>
+		      <div class="col-12">
+						<p class="mb-4">Rechercher par :</p>
 					</div>
       
 					<div class="col-12 pb-5">
