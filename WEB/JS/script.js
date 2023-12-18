@@ -18,31 +18,30 @@
             //     }
 
 
-            function handleSearch() {
-                // Récupérez le type de recherche sélectionné
-                const searchType = document.querySelector('input[name="tools"]:checked').value;
+            console.log("test");
+
+            function performSearch() {
+                console.log("on y entre");
+                // Récupérer la valeur de la checkbox sélectionnée
+                var selectedTool = document.querySelector('input[name="tools"]:checked').value;
             
-                // Appelez la fonction de recherche en fonction du type
-                switch (searchType) {
-                    case "author":
-                        searchAuthors();
-                        break;
-                    case "affiliation":
-                        searchByAffiliation();
-                        break;
-                    // Ajoutez d'autres cas au besoin
-            
-                    default:
-                        console.error("Type de recherche non pris en charge.");
+                // Appeler la fonction appropriée en fonction de la checkbox sélectionnée
+                if (selectedTool === "author") {
+                    searchAuthors();
+                } else if (selectedTool === "affiliation") {
+                    searchByAffiliation();
+                } else if (selectedTool === "keyword") {
+                    searchByTextQuery();
                 }
             }
             
             // Ajoutez un gestionnaire d'événements au bouton de recherche
-            document.getElementById("searchButton").addEventListener("click", handleSearch);
+            //document.getElementById("searchButton").addEventListener("click", handleSearch);
             
 
                     
                 function searchAuthors() {
+                    console.log("on entre ds searchAuthors");
                     const authorName = document.getElementById("authorName").value;
                     if (authorName.trim() === "") {
                         alert("Veuillez entrer un nom pour effectuer la recherche.");

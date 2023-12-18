@@ -62,10 +62,7 @@ body::before {
   z-index: -1;
 }
 
-/**** animated background ********************/
 
-
-/*********************************************/
 
 .col-12{
   font-family: 'ELEGANT', sans-serif;
@@ -236,9 +233,13 @@ p{
 
 
 
+/*******************   RESULTAT DE RECHERCHE *******************/
 
+.searchingResult {
+  display: block;
+  background-color: #2f579c;
+  margin: 5px;
+}
 
-
-
-
+/***************************************************************/
 
