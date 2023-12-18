@@ -19,10 +19,6 @@
 
     <body>
         
-
-
-        
-
         <!-- <div id="connectionStatus">
         <button class="btn-connect" type="button" onclick="testDatabaseConnection()">Tester la Connexion</button>
         </div> 
@@ -59,19 +55,19 @@
 					</div>
       
 					<div class="col-12 pb-5">
-						<input class="checkbox-tools" type="radio" name="tools" id="tool-1" checked>
+						<input class="checkbox-tools" type="radio" name="tools" id="tool-1" checked value=author>
 						<label class="for-checkbox-tools" for="tool-1">
 							<i class='uil uil-line-alt'></i>
 							Auteur
 						</label>
 						
-                        <input class="checkbox-tools" type="radio" name="tools" id="tool-2">
+                        <input class="checkbox-tools" type="radio" name="tools" id="tool-2" value="affiliation">
 						<label class="for-checkbox-tools" for="tool-2">
 							<i class='uil uil-vector-square'></i>
 							Affiliation
 						</label>
                         
-                        <input class="checkbox-tools" type="radio" name="tools" id="tool-3">
+                        <input class="checkbox-tools" type="radio" name="tools" id="tool-3" value="keyword">
 						<label class="for-checkbox-tools" for="tool-3">
 							<i class='uil uil-ruler'></i>
 							Mot-clé
@@ -80,7 +76,6 @@
      </div>
 
 
-        
 
 
         <div id="searchResults">

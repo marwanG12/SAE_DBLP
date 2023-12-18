@@ -18,6 +18,28 @@
             //     }
 
 
+            function handleSearch() {
+                // Récupérez le type de recherche sélectionné
+                const searchType = document.querySelector('input[name="tools"]:checked').value;
+            
+                // Appelez la fonction de recherche en fonction du type
+                switch (searchType) {
+                    case "author":
+                        searchAuthors();
+                        break;
+                    case "affiliation":
+                        searchByAffiliation();
+                        break;
+                    // Ajoutez d'autres cas au besoin
+            
+                    default:
+                        console.error("Type de recherche non pris en charge.");
+                }
+            }
+            
+            // Ajoutez un gestionnaire d'événements au bouton de recherche
+            document.getElementById("searchButton").addEventListener("click", handleSearch);
+            
 
                     
                 function searchAuthors() {
