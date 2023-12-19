@@ -137,7 +137,7 @@
                     } else {
                         results.forEach(result => {
                             const affiliationInfo = document.createElement("div");
-                            affiliationInfo.classList.add("affiliation-info");
+                            affiliationInfo.classList.add("affiliation-bloc");
 
                             const name = document.createElement("h2");
                             name.textContent = result.name;
