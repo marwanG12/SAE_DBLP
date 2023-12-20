@@ -1,7 +1,7 @@
 <?php
 
 require_once "Cont_Home.php";
-include_once "PDOConnection.php";
+include_once "pdoConnection.php";
 
 class ModHome extends PDOConnection
 {
@@ -15,7 +15,15 @@ class ModHome extends PDOConnection
 
         switch ($this->controller->getAction()) 
         {
-
+            case "author":
+                $this->controller->author();
+            break;
+            case "affiliation":
+                $this->controller->affiliation();
+            break;
+            case "tfidf":
+                $this->controller->tfidf();
+            break;
         }
 
         $this->controller->exec();

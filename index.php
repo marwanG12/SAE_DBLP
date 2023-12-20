@@ -8,8 +8,8 @@
 
     
     
-    include_once("PDOConnection.php");
-    include_once("Controller.php");
+    include_once("pdoConnection.php");
+    include_once("controller.php");
 
     $view;
     PDOConnection::initPDO();

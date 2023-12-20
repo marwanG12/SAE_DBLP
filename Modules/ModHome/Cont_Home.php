@@ -9,7 +9,6 @@ class ContHome
     private $model;
     private $action;
 
-    //Constructeur
     public function __construct() 
     {
         $this->view = new ViewHome();
@@ -19,6 +18,27 @@ class ContHome
 
     public function getAction() {
         return $this->action;
+    }
+
+    public function     author() {
+
+        $this->view->searchBar();
+        $this->view->displayResultsAuthor($this->model->getAuthor());
+
+    }
+
+    public function affiliation() {
+
+        $this->view->searchBar();
+        $this->view->displayResultsAffiliation($this->model->getAffiliation());
+ 
+    }
+
+    public function tfidf() {
+
+        $this->view->searchBar();
+        $this->view->displayResultsTfIdf($this->model->getTfIdf());
+ 
     }
 
     public function exec() {

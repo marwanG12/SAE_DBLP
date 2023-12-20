@@ -29,15 +29,6 @@ class Controller
             case 'home':
                 new ModHome();
             break;
-            case 'author':
-                new ModAuth();
-            break;
-            case 'affiliation':
-                new ModAffiliation();
-            break;
-            case 'tfidf':
-                new ModTfIdf();
-            break;
             default :
                 die("Le module demandé n'existe pas.");
         }
