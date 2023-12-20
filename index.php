@@ -8,7 +8,7 @@
 
     
     
-    include_once("pdoConnection.php");
+    require_once("pdoConnection.php");
     include_once("controller.php");
 
     $view;
