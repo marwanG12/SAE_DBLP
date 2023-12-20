@@ -38,7 +38,7 @@ body{
 	font-size: 17px;
 	line-height: 30px;
   flex-direction: column;
-  background-image: url('../IMG/bck.jpg');
+  background-image: url('Images/bck.jpg');
   background-size: cover; /* Ajuster la taille de l'image pour couvrir complètement l'élément */
   background-position: center;
 
