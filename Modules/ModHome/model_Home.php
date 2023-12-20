@@ -10,7 +10,9 @@ class ModelHome extends PDOConnection
 
     }
 
-    public function getAuthor($authorName){
+    public function getAuthor(){
+
+        $authorName = $_GET["authorName"];
 
         $stmt = parent::$db->prepare("SELECT dblp.authors.name, 
         dblp.affiliation.name AS affiliation, 
@@ -37,7 +39,9 @@ class ModelHome extends PDOConnection
         return $results;
     }
 
-    public function getAffiliation($authorName) {
+    public function getAffiliation() {
+
+        $authorName = $_GET["authorName"];
 
         $stmt = parent::$db->prepare("SELECT dblp.affiliation.name AS name, dblp.affiliation.country AS country,
         COUNT(dblp.publications.id) AS nbpublications,
@@ -64,7 +68,7 @@ class ModelHome extends PDOConnection
 
     } 
 
-    public function getTfIdf($authorName){
+    public function getTfIdf(){
 
     }
 

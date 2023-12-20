@@ -17,13 +17,19 @@ function performSearch() {
 }
 
 function callPhpFunction(functionName) {
+    // Affiche le contenu de functionName dans la console
+    console.log('Function Name:', functionName);
+
     // Appel AJAX avec XMLHttpRequest
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '../../Modules/ModHome/model_Home.php', true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     // Construire les données à envoyer
-    var data = 'action=' + functionName;
+    var data = 'action=' + encodeURIComponent(functionName);
+
+    // Affiche le contenu de data dans la console
+    console.log('Data:', data);
 
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -31,10 +37,12 @@ function callPhpFunction(functionName) {
             console.log(xhr.responseText);
         } else {
             // La requête a échoué
-            console.error('Erreur AJAX:', xhr.statusText);
+            console.error('Erreur AJAX. Statut:', xhr.status, 'Message:', xhr.statusText);
         }
     };
 
     // Envoyer la requête avec les données
     xhr.send(data);
 }
+
+
