@@ -50,6 +50,7 @@
                     fetch("auteur.php?authorName=" + authorName)
                         .then(response => response.json())
                         .then(data => {
+                            console.log(data);
                             // Appel de la fonction displayResults pour afficher les données
                             displayResultsActors(data);
                         })
