@@ -1,6 +1,6 @@
 <?php
 
-require_once "Cont_Home.php";
+require_once "cont_Home.php";
 include_once "pdoConnection.php";
 
 class ModHome extends PDOConnection

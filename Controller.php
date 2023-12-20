@@ -1,5 +1,5 @@
 <?php
-require_once("GenericView.php");
+require_once("genericView.php");
 
 class Controller
 {
@@ -16,11 +16,6 @@ class Controller
     public function navigation()
     {
         new CompNavigation();
-    }
-
-    public function footer()
-    {
-        new CompFooter();
     }
 
     public function exec()

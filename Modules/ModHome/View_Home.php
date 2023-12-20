@@ -12,18 +12,6 @@ class ViewHome extends GenericView
 
     }
 
-    
-    public static function searchBar(){
-        ?>
-        <h18>Recherche d'auteur</h18>
-        <form id="searchForm">
-            <label for="authorName">Nom de l'auteur (partiel ou complet) : </label>
-            <input type="text" id="authorName" name="authorName">
-        </form>
-        <?php
-
-    }
-
     public static function displayResultsAuthor($results)
     {
         ?>

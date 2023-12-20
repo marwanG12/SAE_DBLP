@@ -1,7 +1,7 @@
 <?php
 
-require_once('Model_Home.php');
-require_once('View_Home.php');
+require_once('model_Home.php');
+require_once('view_Home.php');
 
 class ContHome
 {
@@ -20,7 +20,7 @@ class ContHome
         return $this->action;
     }
 
-    public function     author() {
+    public function author() {
 
         $this->view->searchBar();
         $this->view->displayResultsAuthor($this->model->getAuthor());
