@@ -1,5 +1,7 @@
 <?php
 require_once("genericView.php");
+require_once("Modules/ModHome/mod_Home.php");
+require_once("Components/CompNav/cont_Nav.php");
 
 class Controller
 {
@@ -15,7 +17,7 @@ class Controller
 
     public function navigation()
     {
-        new CompNavigation();
+        //new CompNavigation();
     }
 
     public function exec()

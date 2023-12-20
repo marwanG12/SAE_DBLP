@@ -21,22 +21,15 @@ class ContHome
     }
 
     public function author() {
-
-        $this->view->searchBar();
         $this->view->displayResultsAuthor($this->model->getAuthor());
-
     }
 
     public function affiliation() {
-
-        $this->view->searchBar();
         $this->view->displayResultsAffiliation($this->model->getAffiliation());
  
     }
 
     public function tfidf() {
-
-        $this->view->searchBar();
         $this->view->displayResultsTfIdf($this->model->getTfIdf());
  
     }

@@ -1,7 +1,7 @@
 <?php
 
-require_once("View_Navigation.php");
-require_once("Model_Navigation.php");
+require_once("view_Nav.php");
+require_once("model_Nav.php");
 
 class ContNavigation
 {

@@ -1,6 +1,6 @@
 <?php
 
-require_once("Components/CompNavigation/Cont_Navigation.php");
+require_once("cont_Nav.php");
 
 class CompNavigation
 {

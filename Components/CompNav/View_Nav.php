@@ -1,6 +1,6 @@
 <?php
 
-require_once("GenericView.php");
+require_once("genericView.php");
 
 class ViewNavigation extends GenericView
 {
