@@ -11,10 +11,16 @@
     <!-- <script src="JS/script.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="JS/script.js"></script>
+    
 </head>
 
     <header>
+    
+    <div class="topnav">
+        <a class="active" href="index.php">Home</a>
+        <a href="#contact">Graph</a>
+        <a href="#about">About</a>
+    </div>
     <h1>DBLP</h1>
     </header>
 
@@ -40,11 +46,6 @@
             </div>
 
 
-            <!-- <label for="authorName">Rechercher : </label>
-            <input type="text" id="authorName" name="authorName">
-            <button type="button" onclick="searchAuthors()">Rechercher par Auteur</button>
-            <button type="button" onclick="searchByAffiliation()">Rechercher par Affiliation</button>
-            <button type="button" onclick="searchByTextQuery()">Rechercher par Requête Textuelle</button> -->
         </form>
         </div>
 
@@ -79,11 +80,10 @@
 
 
         <div class="searchingResult" id="searchResults">
-            <!-- Les résultats de la recherche seront affichés ici -->
         </div>
 
      
 
-        
+        <script src="JS/script.js"></script> 
     </body>
 </html>
