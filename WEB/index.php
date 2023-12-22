@@ -12,7 +12,6 @@ session_start();
     <title>DBLP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="JS/script.js"></script>
     <link rel="stylesheet" href="./resources/css/style.css"/>
     <title>DBLP</title>
     <link rel="icon" href="Assets/Images/favicon.ico">
@@ -73,6 +72,7 @@ session_start();
     <div class="searchingResult" id="searchResults">
         <!-- Les résultats de la recherche seront affichés ici -->
     </div>
+    <script src="./resources/js/script.js"></script>
 
 </body>
 
