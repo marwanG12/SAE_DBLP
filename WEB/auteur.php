@@ -13,8 +13,6 @@ $port = '5432';
 // Tentez de vous connecter à la base de données  
 $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password");
 
-
-
 if (isset($_GET['authorName'])) {
     $authorName = $_GET['authorName'];
 
